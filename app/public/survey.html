@@ -26,7 +26,7 @@
             <br>
             
                 <h4>Question 1</h4>
-                <h4>This is a Sample Question</h4>
+                <h4>I consider myself a nice/compassionate person</h4>
                 <select class="chosen-select" id="q1">
                     <option value></option>
                     <option value='1'>1 (strongly disagree)</option>
@@ -39,7 +39,7 @@
                 <br>
             
                 <h4>Question 2</h4>
-                <h4>This is a Sample Question</h4>
+                <h4>My ideal mate loves animals!</h4>
                 <select class="chosen-select" id="q2">
                     <option value></option>
                     <option value='1'>1 (strongly disagree)</option>
@@ -52,7 +52,7 @@
                 <br>
 
                 <h4>Question 3</h4>
-                <h4>This is a Sample Question</h4>
+                <h4>Meat is delicous and I love it</h4>
                 <select class="chosen-select" id="q3">
                     <option value></option>
                     <option value='1'>1 (strongly disagree)</option>
@@ -65,7 +65,7 @@
                 <br>
 
                 <h4>Question 4</h4>
-                <h4>This is a Sample Question</h4>
+                <h4>I think the man should pay for most things</h4>
                 <select class="chosen-select" id="q4">
                     <option value></option>
                     <option value='1'>1 (strongly disagree)</option>
@@ -78,7 +78,7 @@
                 <br>
 
                 <h4>Question 5</h4>
-                <h4>This is a Sample Question</h4>
+                <h4>People discuss politics way too much, I dont like to think about it</h4>
                 <select class="chosen-select" id="q5">
                     <option value></option>
                     <option value='1'>1 (strongly disagree)</option>
@@ -91,7 +91,7 @@
                 <br>
 
                 <h4>Question 6</h4>
-                <h4>This is a Sample Question</h4>
+                <h4>I don't think couples should argue or yell in public</h4>
                 <select class="chosen-select" id="q6">
                     <option value></option>
                     <option value='1'>1 (strongly disagree)</option>
@@ -104,7 +104,7 @@
                 <br>
 
                 <h4>Question 7</h4>
-                <h4>This is a Sample Question</h4>
+                <h4>I like outdoor activities from time to time, but most often I just wanna netflix and chill</h4>
                 <select class="chosen-select" id="q7">
                     <option value></option>
                     <option value='1'>1 (strongly disagree)</option>
@@ -117,7 +117,7 @@
                 <br>
 
                 <h4>Question 8</h4>
-                <h4>This is a Sample Question</h4>
+                <h4>It is rude to be on your phone when out with a friend</h4>
                 <select class="chosen-select" id="q8">
                     <option value></option>
                     <option value='1'>1 (strongly disagree)</option>
@@ -130,7 +130,7 @@
                 <br>
 
                 <h4>Question 9</h4>
-                <h4>This is a Sample Question</h4>
+                <h4>I love and have a good relationship with my family!</h4>
                 <select class="chosen-select" id="q9">
                     <option value></option>
                     <option value='1'>1 (strongly disagree)</option>
@@ -143,7 +143,7 @@
                 <br>
                 
                 <h4>Question 10</h4>
-                <h4>This is a Sample Question</h4>
+                <h4>I enjoy pushing the boundries in the bedroom</h4>
                 <select class="chosen-select" id="q10">
                     <option value></option>
                     <option value='1'>1 (strongly disagree)</option>
@@ -159,7 +159,7 @@
         </div>
         
         
-        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     
@@ -188,14 +188,34 @@
 
            if(validateform()){
                console.log("form filled");
-           }
-            // var newFriend = {
-            //     name: $("#name").val().trim(),
-            //     photo: $("photo").val().trim(),
-            //     scores: [
+               var name = $("#name").val().trim();
+               var photo =  $("photo").val();
+               var newFriend = {
+                name: name,
+                photo: photo,
+                scores: [ 
+                    $("#q1").val(),
+                    $("#q2").val(),
+                    $("#q3").val(),
+                    $("#q4").val(),
+                    $("#q5").val(),
+                    $("#q6").val(),
+                    $("#q7").val(),
+                    $("#q8").val(),
+                    $("#q9").val(),
+                    $("#q10").val(),
 
-            //     ]
-            // }
+                ]
+            }
+               $.post("/api/friends", newFriend, function(data){
+                   alert("new Friend added!");
+                   
+               }) 
+
+           } else {
+               alert("Please fill out all fields!");
+           }
+           
         });
 
 </script>
