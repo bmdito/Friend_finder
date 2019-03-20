@@ -65,7 +65,7 @@
                 <br>
 
                 <h4>Question 4</h4>
-                <h4>I think the man should pay for most things</h4>
+                <h4>Dannncceeppparttyyyyy!</h4>
                 <select class="chosen-select" id="q4">
                     <option value></option>
                     <option value='1'>1 (strongly disagree)</option>
@@ -156,6 +156,28 @@
                 <br>
                 
             <button type="submit" class="btn btn-primary btn-lg btn-block" id="submit">Submit Your Answers</button>    
+        <footer>
+            <p style="height:60px">By Blake Dito</p>
+            <a href='/api/friends'>Friends list</a>
+        </footer>
+        <div id="results" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h3 class="modal-title">Your New friend</h1>
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+                        <div class="modal-body">
+                            <h2 id="bestFriendName"></h2>
+                            <img id="friendPic" src="#">
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
         </div>
         
         
@@ -169,16 +191,20 @@
             event.preventDefault();
 
            function validateform(){
-               var isValid = true;
-               $('form-control').each(function(){
+                console.log("test");   
+            var isValid = true;
+               
+               $('.form-control').each(function(){
                    if($(this).val() == ''){
+                       console.log("test1");
                        isValid = false;
                    }
                });
 
-               $('chosen-select').each(function(){
-                   if($(this).val() == ''){
+               $('.chosen-select').each(function(){
+                   if($(this).val() == null){
                        isValid = false;
+                       console.log("review");
                    }
                });
 
@@ -189,7 +215,7 @@
            if(validateform()){
                console.log("form filled");
                var name = $("#name").val().trim();
-               var photo =  $("photo").val();
+               var photo =  $("#photo").val();
                var newFriend = {
                 name: name,
                 photo: photo,
@@ -208,6 +234,10 @@
                 ]
             }
                $.post("/api/friends", newFriend, function(data){
+                   console.log(data);
+                   $("#bestFriendName").text(data.name);
+                   $("#friendPic").attr("src", data.photo);
+                   $("#results").modal("toggle");
                    alert("new Friend added!");
                    
                }) 
@@ -216,6 +246,8 @@
                alert("Please fill out all fields!");
            }
            
+
+
         });
 
 </script>

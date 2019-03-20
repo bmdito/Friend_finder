@@ -9,6 +9,9 @@ module.exports = function(app){
 
     app.post("/api/friends", function(req, res){
         friendData.push(req.body);
+
+        res.json(friendData[0]);
     });
 
 }
+
